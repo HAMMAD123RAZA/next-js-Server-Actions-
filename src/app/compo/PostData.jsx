@@ -1,27 +1,26 @@
-"use client"
+import DB from "../lib/DB"
+import post from "../models/post"
 
-import { useState } from "react"
+
+const create=async(formdata)=>{
+    "use server"
+ await DB()
+
+ const api=post.create({
+    title:formdata.get("title"),
+    body:formdata.get("body")
+ })
+ console.log("result",api)
+}
+
 
 const PostData = () => {
-    const [formData,setformData]=bodyseState({
-        title:"" ,
-        body:"",
-    })
-
-    const handleChange=(e)=>{
-        setformData({...formData,[e.target.name]:e.target.value})
-    }
-
-    const handleSubmit=(e)=>{
-        
-    }
-    
   return (
     <>
-      <form action=""  onSubmit={handleSubmit} >
-        <input type="text" name="title" placeholder="title" value={formData.title} onChange={handleChange}   />
-        <input type="text" name="body" placeholder="body" value={formData.body} onChange={handleChange}   />
-        <button type="submit" >sumit</button>
+      <form action={create}  >
+        <input type="text" name="title"  />
+        <input type="text" name="body"  />
+            <button type="submit"  >add</button>
       </form>
     </>
   )
